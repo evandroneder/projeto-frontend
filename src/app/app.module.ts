@@ -20,6 +20,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { ServiceComponent } from './pages/service/service.component';
 import { ContratarComponent } from './modals/contratar/contratar.component';
 import { PerfilComponent } from './pages/perfil/perfil.component';
+import { AvaliacaoComponent } from './modals/avaliacao/avaliacao.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { PerfilComponent } from './pages/perfil/perfil.component';
     ServiceComponent,
     ContratarComponent,
     PerfilComponent,
+    AvaliacaoComponent,
   ],
   imports: [
     BrowserModule,
