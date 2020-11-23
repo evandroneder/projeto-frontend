@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ServicosService } from 'src/app/services/servicos.service';
 
 @Component({
   selector: 'app-register-business',
@@ -7,14 +8,12 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./register-business.component.scss'],
 })
 export class RegisterBusinessComponent implements OnInit {
-  services = [
-    { id: 0, label: 'Pintura residencial' },
-    { id: 1, label: 'Serviço de elétrica' },
-    { id: 2, label: 'Pequenos reparos' },
-    { id: 3, label: 'Montagem e desmontagem de móveis' },
-  ];
+  services;
   form: FormGroup;
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private servicosService: ServicosService
+  ) {
     this.form = this.fb.group({
       nome: ['', Validators.required],
       celular: ['', Validators.required],
@@ -22,6 +21,8 @@ export class RegisterBusinessComponent implements OnInit {
       senha: ['', Validators.required],
       servicos: ['', Validators.required],
     });
+
+    this.services = this.servicosService.services;
   }
 
   ngOnInit(): void {}

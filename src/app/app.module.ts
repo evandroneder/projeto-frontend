@@ -16,9 +16,19 @@ import { RegisterComponent } from './pages/register/register.component';
 import { RegisterUserComponent } from './pages/register-user/register-user.component';
 import { RegisterBusinessComponent } from './pages/register-business/register-business.component';
 import { LoginComponent } from './pages/login/login.component';
+import { HomeComponent } from './pages/home/home.component';
+import { ServiceComponent } from './pages/service/service.component';
 
 @NgModule({
-  declarations: [AppComponent, RegisterComponent, RegisterUserComponent, RegisterBusinessComponent, LoginComponent],
+  declarations: [
+    AppComponent,
+    RegisterComponent,
+    RegisterUserComponent,
+    RegisterBusinessComponent,
+    LoginComponent,
+    HomeComponent,
+    ServiceComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
