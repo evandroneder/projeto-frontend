@@ -1,0 +1,15 @@
+.page {
+  align-content: center;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.card-container {
+  padding: 1rem;
+  width: 45%;
+}

@@ -18,6 +18,8 @@ import { RegisterBusinessComponent } from './pages/register-business/register-bu
 import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ServiceComponent } from './pages/service/service.component';
+import { ContratarComponent } from './modals/contratar/contratar.component';
+import { PerfilComponent } from './pages/perfil/perfil.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { ServiceComponent } from './pages/service/service.component';
     LoginComponent,
     HomeComponent,
     ServiceComponent,
+    ContratarComponent,
+    PerfilComponent,
   ],
   imports: [
     BrowserModule,
