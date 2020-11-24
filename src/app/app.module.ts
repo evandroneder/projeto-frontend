@@ -21,6 +21,7 @@ import { ServiceComponent } from './pages/service/service.component';
 import { ContratarComponent } from './modals/contratar/contratar.component';
 import { PerfilComponent } from './pages/perfil/perfil.component';
 import { AvaliacaoComponent } from './modals/avaliacao/avaliacao.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { AvaliacaoComponent } from './modals/avaliacao/avaliacao.component';
     MatToolbarModule,
     MatCardModule,
     MatButtonModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

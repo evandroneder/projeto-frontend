@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ContratarComponent } from 'src/app/modals/contratar/contratar.component';
 import { ServicosService } from 'src/app/services/servicos.service';
 
 @Component({
@@ -8,7 +10,10 @@ import { ServicosService } from 'src/app/services/servicos.service';
 })
 export class ServiceComponent implements OnInit {
   prestadores: { id: number; nome: string; nota: number }[];
-  constructor(private servicosServices: ServicosService) {
+  constructor(
+    private servicosServices: ServicosService,
+    private matDialog: MatDialog
+  ) {
     this.prestadores = [
       { id: 0, nome: 'Empresa A', nota: 1 },
       { id: 1, nome: 'Empresa B', nota: 5 },
@@ -19,5 +24,12 @@ export class ServiceComponent implements OnInit {
 
   getTotal(nota: number) {
     return new Array(nota);
+  }
+
+  handleContract(prestador: { id: number; nome: string; nota: number }) {
+    this.matDialog.open(ContratarComponent, {
+      width: '450px',
+      data: prestador,
+    });
   }
 }

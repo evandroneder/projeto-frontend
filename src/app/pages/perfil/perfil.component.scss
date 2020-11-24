@@ -1,0 +1,20 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.servico {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  margin: 1rem;
+  height: auto;
+
+  &-desc {
+    margin-left: 1rem;
+    height: auto;
+    word-wrap: break-all !important;
+  }
+}

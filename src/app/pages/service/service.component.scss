@@ -13,3 +13,8 @@
   padding: 1rem;
   width: 45%;
 }
+@media screen and (max-width: 700px) {
+  .card-container {
+    width: 100%;
+  }
+}
