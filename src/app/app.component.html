@@ -11,6 +11,10 @@
       <mat-icon>home</mat-icon>
       <span>Home</span>
     </button>
+    <button mat-menu-item routerLink="perfil">
+      <mat-icon>person</mat-icon>
+      <span>Perfil</span>
+    </button>
     <button mat-menu-item routerLink="cadastro">
       <mat-icon>group_add</mat-icon>
       <span>Cadastro</span>
@@ -19,14 +23,10 @@
       <mat-icon>login</mat-icon>
       <span>Login</span>
     </button>
-    <button mat-menu-item>
+
+    <button mat-menu-item (click)="handleLogout()">
       <mat-icon>clear</mat-icon>
       <span>Logout</span>
-    </button>
-
-    <button mat-menu-item routerLink="perfil">
-      <mat-icon>person</mat-icon>
-      <span>Perfil</span>
     </button>
   </mat-menu>
 </mat-toolbar>

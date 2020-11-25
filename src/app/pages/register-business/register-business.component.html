@@ -11,19 +11,19 @@
       >
         <mat-form-field>
           <mat-label>Nome</mat-label>
-          <input matInput type="text" formControlName="nome" />
+          <input matInput type="text" formControlName="name" />
           <mat-error>Campo requerido</mat-error>
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>Celular</mat-label>
-          <input matInput type="text" formControlName="celular" />
+          <input matInput type="text" formControlName="phone" />
           <mat-error>Campo requerido</mat-error>
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>Serviços</mat-label>
-          <mat-select formControlName="servicos" multiple>
+          <mat-select formControlName="services" multiple>
             <mat-option *ngFor="let service of services" [value]="service">
               {{ service.label }}
             </mat-option>
@@ -39,7 +39,7 @@
 
         <mat-form-field>
           <mat-label>Senha</mat-label>
-          <input matInput type="password" formControlName="senha" />
+          <input matInput type="password" formControlName="password" />
           <mat-error>Campo requerido</mat-error>
         </mat-form-field>
 

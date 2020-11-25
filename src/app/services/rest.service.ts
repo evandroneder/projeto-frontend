@@ -4,6 +4,7 @@ import { catchError, take, takeUntil } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
+import { SessionService } from './session.service';
 
 @Injectable({
   providedIn: 'root',
@@ -91,10 +92,10 @@ export class RestService {
   }
 
   createHeader(header?: any) {
-    let headers = new HttpHeaders();
-    //   {
-    //   'app-token': this.sessionService.getToken(),
-    // }
+    let headers = new HttpHeaders({
+      'app-token': this.sessionService.getToken(),
+    });
+
     if (header) {
       Object.getOwnPropertyNames(header).forEach((attr) => {
         headers = headers.set(attr, header[attr]);
@@ -103,5 +104,9 @@ export class RestService {
 
     return headers;
   }
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private sessionService: SessionService
+  ) {}
 }

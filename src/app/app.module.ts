@@ -22,6 +22,8 @@ import { ContratarComponent } from './modals/contratar/contratar.component';
 import { PerfilComponent } from './pages/perfil/perfil.component';
 import { AvaliacaoComponent } from './modals/avaliacao/avaliacao.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { HttpClientModule } from '@angular/common/http';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatCardModule,
     MatButtonModule,
     MatDialogModule,
+    HttpClientModule,
+    MatSnackBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

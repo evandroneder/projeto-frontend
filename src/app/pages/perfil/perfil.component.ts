@@ -12,17 +12,14 @@ export class PerfilComponent implements OnInit {
     nome?: string;
     nota?: number;
   };
-  servicos: { id: number; desc: string }[];
+  servicos: { id: number; desc: string; finalizado: boolean }[];
   constructor(private matDialog: MatDialog) {
     this.servicos = [
-      { id: 0, desc: 'blablabla' },
-      { id: 1, desc: 'blablabla' },
-      { id: 2, desc: 'blablabla' },
-      {
-        id: 3,
-        desc:
-          'blablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablabla',
-      },
+      { id: 0, desc: 'blablabla', finalizado: false },
+      { id: 1, desc: 'blablabla', finalizado: false },
+      { id: 2, desc: 'blablabla', finalizado: true },
+
+      { id: 3, desc: 'blablabla', finalizado: true },
     ];
     this.perfil = { nota: 5, nome: 'Empresa B' };
   }
