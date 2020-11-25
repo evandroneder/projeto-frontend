@@ -29,7 +29,7 @@ const routes: Routes = [
   },
   { path: 'login', component: LoginComponent, canActivate: [NotLoggedInGuard] },
   {
-    path: 'servico/:id',
+    path: 'servico/:nome/:id',
     component: ServiceComponent,
     canActivate: [LoggedInGuard],
   },

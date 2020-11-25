@@ -7,23 +7,24 @@
       display: flex;
     "
   >
-    <b>{{ perfil.nome }}</b>
-    &nbsp;
-    <ng-container *ngFor="let count of getTotal()">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        style="fill: #fbc94e"
-      >
-        <path
-          d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-        />
-      </svg>
-    </ng-container>
+    <b>{{ perfil?.name }}</b>
+    <ng-container *ngIf="perfil?.type === 'BUSINESS'">
+      &nbsp;
+      <ng-container *ngFor="let count of getTotal()">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          style="fill: #fbc94e"
+        >
+          <path
+            d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+          />
+        </svg> </ng-container
+    ></ng-container>
   </h1>
-  <ng-container *ngFor="let servico of servicos">
+  <ng-container *ngFor="let servico of perfil?.servicos">
     <mat-card
       class="servico"
       [ngStyle]="{

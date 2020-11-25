@@ -1,6 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { AvaliacaoComponent } from 'src/app/modals/avaliacao/avaliacao.component';
+import { RestService } from 'src/app/services/rest.service';
+
+interface IProfile {
+  _id: string;
+  name: string;
+  email: string;
+  type: string;
+  phone: string;
+  nota: number;
+  servicos: any[];
+}
 
 @Component({
   selector: 'app-perfil',
@@ -8,26 +23,20 @@ import { AvaliacaoComponent } from 'src/app/modals/avaliacao/avaliacao.component
   styleUrls: ['./perfil.component.scss'],
 })
 export class PerfilComponent implements OnInit {
-  perfil: {
-    nome?: string;
-    nota?: number;
-  };
-  servicos: { id: number; desc: string; finalizado: boolean }[];
-  constructor(private matDialog: MatDialog) {
-    this.servicos = [
-      { id: 0, desc: 'blablabla', finalizado: false },
-      { id: 1, desc: 'blablabla', finalizado: false },
-      { id: 2, desc: 'blablabla', finalizado: true },
+  perfil: IProfile | undefined;
+  constructor(
+    private matDialog: MatDialog,
+    private snack: MatSnackBar,
+    private router: Router,
+    private rest: RestService
+  ) {}
 
-      { id: 3, desc: 'blablabla', finalizado: true },
-    ];
-    this.perfil = { nota: 5, nome: 'Empresa B' };
+  ngOnInit(): void {
+    this.get();
   }
 
-  ngOnInit(): void {}
-
   getTotal() {
-    return new Array(this.perfil.nota);
+    return new Array(this.perfil?.nota);
   }
 
   onCloseService(service: { id: number; desc: string }) {
@@ -35,5 +44,22 @@ export class PerfilComponent implements OnInit {
       width: '450px',
       data: service,
     });
+  }
+
+  loading = false;
+  get() {
+    this.loading = true;
+    this.rest
+      .get<IProfile>('user/profile')
+      .pipe(
+        catchError((e) => {
+          {
+            this.snack.open(e, 'x');
+            return throwError(e);
+          }
+        })
+      )
+      .subscribe((r) => (this.perfil = r))
+      .add(() => (this.loading = false));
   }
 }

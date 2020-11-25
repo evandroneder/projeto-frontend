@@ -1,12 +1,12 @@
 <div class="page">
-  <h1 style="text-align: center; padding: 1rem">Pintura residencial</h1>
+  <h1 style="text-align: center; padding: 1rem">{{ name }}</h1>
   <div class="container">
     <ng-container *ngFor="let prestador of prestadores">
       <div class="card-container">
         <mat-card class="card">
           <mat-card-header>
             <mat-card-title style="align-items: center; display: flex"
-              >{{ prestador.nome }}
+              >{{ prestador.name }}
               &nbsp;
               <ng-container *ngFor="let count of getTotal(prestador.nota)">
                 <svg

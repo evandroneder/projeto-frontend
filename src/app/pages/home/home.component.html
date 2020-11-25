@@ -16,7 +16,10 @@
         <img mat-card-image [src]="service.image" />
 
         <mat-card-actions>
-          <button mat-button [routerLink]="'/servico/' + service.id">
+          <button
+            mat-button
+            [routerLink]="'/servico/' + service.label + '/' + service.id"
+          >
             Prestadores
           </button>
         </mat-card-actions>
