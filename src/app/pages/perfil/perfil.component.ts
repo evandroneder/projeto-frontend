@@ -8,13 +8,14 @@ import { AvaliacaoComponent } from 'src/app/modals/avaliacao/avaliacao.component
 import { RestService } from 'src/app/services/rest.service';
 
 interface IProfile {
-  _id: string;
-  name: string;
-  email: string;
-  type: string;
-  phone: string;
-  nota: number;
-  servicos: any[];
+  _id?: string;
+  name?: string;
+  email?: string;
+  type?: string;
+  phone?: string;
+  nota?: number;
+  servicos?: any[];
+  contracts?: any[];
 }
 
 @Component({
@@ -23,7 +24,7 @@ interface IProfile {
   styleUrls: ['./perfil.component.scss'],
 })
 export class PerfilComponent implements OnInit {
-  perfil: IProfile | undefined;
+  perfil: IProfile = {};
   constructor(
     private matDialog: MatDialog,
     private snack: MatSnackBar,
@@ -39,11 +40,23 @@ export class PerfilComponent implements OnInit {
     return new Array(this.perfil?.nota);
   }
 
-  onCloseService(service: { id: number; desc: string }) {
-    this.matDialog.open(AvaliacaoComponent, {
-      width: '450px',
-      data: service,
-    });
+  onCloseService(contract: any) {
+    this.matDialog
+      .open(AvaliacaoComponent, {
+        width: '450px',
+        data: contract,
+      })
+      .afterClosed()
+      .subscribe((data) => {
+        if (data.finalizado) {
+          if (this.perfil.contracts) {
+            const idx = this.perfil?.contracts?.findIndex(
+              (x) => x.guid === contract.guid
+            );
+            this.perfil.contracts[idx].pending = false;
+          }
+        }
+      });
   }
 
   loading = false;

@@ -24,22 +24,28 @@
         </svg> </ng-container
     ></ng-container>
   </h1>
-  <ng-container *ngFor="let servico of perfil?.servicos">
+  <ng-container *ngIf="!perfil?.contracts">
+    <h3>Nenhum contrato em andamento</h3></ng-container
+  >
+  <ng-container *ngFor="let contract of perfil?.contracts">
     <mat-card
       class="servico"
       [ngStyle]="{
-        'border-bottom': servico.finalizado ? '2px solid #fbc94e' : 'none'
+        'border-bottom': !contract.pending ? '2px solid #fbc94e' : 'none'
       }"
     >
       <div style="display: flex; flex-direction: row">
-        <div class="servico-id">{{ servico.id }}</div>
+        <div class="servico-id">
+          <div>nome: {{ contract.name }}</div>
+          <div>contato: {{ contract.phone }}</div>
+        </div>
         <div class="servico-desc" style="word-break: break-all !important">
-          {{ servico.desc }}
+          descrição: {{ contract.description }}
         </div>
       </div>
-      <ng-container *ngIf="!servico.finalizado">
+      <ng-container *ngIf="contract.pending && perfil?.type === 'USER'">
         <div style="margin-top: 10px; display: flex; justify-content: flex-end">
-          <button mat-button (click)="onCloseService(servico)">
+          <button mat-button (click)="onCloseService(contract)">
             Finalizar serviço
           </button>
         </div>
