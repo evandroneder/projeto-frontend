@@ -3,8 +3,6 @@ name: Deploy Firebase Prod
 on:
   push:
     branches: [master]
-  pull_request:
-    branches: [master]
 
 jobs:
   build:
