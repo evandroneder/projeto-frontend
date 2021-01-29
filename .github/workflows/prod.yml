@@ -11,7 +11,6 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-      - uses: w9jds/firebase-action@master
       - name: Checkout	
         uses: actions/checkout@v2	
       - name: Use Node 12.x	
@@ -21,12 +20,19 @@ jobs:
       - name: Install dependencies	
         run: npm ci	
       - name: Build	
-        run: npm run build	
-      - name: Set Firebase Prod
-        run: firebase use prod --token ${{ secrets.FIREBASE_TOKEN }} 
+        run: npm run build	 
+
+      - name: Use Prod
+        uses: w9jds/firebase-action@master
+        with:
+          args: use prod --token ${{ secrets.FIREBASE_TOKEN }} --only hosting
         env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}   
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}  
+
+
       - name: Deploy to Firebase
-        run: firebase use prod --token ${{ secrets.FIREBASE_TOKEN }} 
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --token ${{ secrets.FIREBASE_TOKEN }} --only hosting
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}  
