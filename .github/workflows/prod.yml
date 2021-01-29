@@ -2,66 +2,24 @@ name: PROD
 
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    branches:
+    - master
+    - release/*
 
 jobs:
-  build:
-    name: Build
+  firebase-deploy:
+
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout	
-        uses: actions/checkout@v2	
-      - name: Use Node 12.x	
-        uses: actions/setup-node@v1	
-        with:	
-          node-version: '12.x'
-      - name: Install dependencies	
-        run: npm ci	
-      - name: Build	
-        run: npm run build	
-      - name: Archive build	
-        if: success()	
-        uses: actions/upload-artifact@v1	
-        with:	
-          name: dist	
-          path: dist 
-      - name: Download Artifact
-        uses: actions/download-artifact@master
-        with:
-          name: dist
-          path: dist
-      - name: Firebase Prod
-        run: firebase use prod --token ${{ secrets.FIREBASE_TOKEN }} 
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}  
-      - name: Deploy to Firebase
-        uses: w9jds/firebase-action@master
-        with:
-          args: deploy --token ${{ secrets.FIREBASE_TOKEN }} --only hosting
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}  
-          
-#   deploy:
-#     name: Deploy
-#     needs: build
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout Repo
-#         uses: actions/checkout@master
-#       - name: Download Artifact
-#         uses: actions/download-artifact@master
-#         with:
-#           name: dist
-#           path: dist
-#       - name: Firebase Prod
-#         run: firebase use prod --token ${{ secrets.FIREBASE_TOKEN }} 
-#         env:
-#           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}  
-#       - name: Deploy to Firebase
-#         uses: w9jds/firebase-action@master
-#         with:
-#           args: deploy --token ${{ secrets.FIREBASE_TOKEN }} --only hosting
-#         env:
-#           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}     
+    - uses: actions/checkout@master
+    - uses: actions/setup-node@master
+      with:
+        node-version: '10.x'
+    - run: npm install
+    - run: npm run build:prod
+    - uses: w9jds/firebase-action@master
+      with:
+        args: deploy --only hosting
+      env:
+        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
