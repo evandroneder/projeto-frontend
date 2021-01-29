@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "projeto-mack-f2732"
+    "qa": "projeto-mack-qa",
+    "prod": "projeto-mack-f2732"
   }
 }
